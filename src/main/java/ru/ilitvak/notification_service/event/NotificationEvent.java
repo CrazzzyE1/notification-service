@@ -1,4 +1,4 @@
-package com.ilitvak.notification_service.event;
+package ru.ilitvak.notification_service.event;
 
 import lombok.*;
 

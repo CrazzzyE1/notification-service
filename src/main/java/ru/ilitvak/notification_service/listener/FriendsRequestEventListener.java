@@ -1,6 +1,6 @@
-package com.ilitvak.notification_service.listener;
+package ru.ilitvak.notification_service.listener;
 
-import com.ilitvak.notification_service.event.NotificationEvent;
+import ru.ilitvak.notification_service.event.NotificationEvent;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.annotation.KafkaListener;
