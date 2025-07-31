@@ -1,0 +1,126 @@
+databaseChangeLog:
+  - changeSet:
+      id: create_events_table
+      author: ilitvak
+      changes:
+        - createTable:
+            tableName: events
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: created
+                  type: timestamp
+                  constraints:
+                    nullable: false
+              - column:
+                  name: sender_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+              - column:
+                  name: recipient_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+              - column:
+                  name: event_type
+                  type: VARCHAR(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: entity_id
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+
+  - changeSet:
+      id: create_notifications_table
+      author: ilitvak
+      changes:
+        - createTable:
+            tableName: notifications
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: event_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+                    references: events(id)
+                    foreignKeyName: fk_notification_event
+              - column:
+                  name: text
+                  type: TEXT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: method
+                  type: VARCHAR(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: read
+                  type: BOOLEAN
+                  constraints:
+                    nullable: false
+
+  - changeSet:
+      id: create_templates_table
+      author: ilitvak
+      changes:
+        - createTable:
+            tableName: templates
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: event_type
+                  type: VARCHAR(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: method
+                  type: VARCHAR(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: locale
+                  type: VARCHAR(10)
+              - column:
+                  name: template_text
+                  type: TEXT
+
+  - changeSet:
+      id: create_event_notification_methods_table
+      author: ilitvak
+      changes:
+        - createTable:
+            tableName: event_notification_methods
+            columns:
+              - column:
+                  name: event_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+                    references: events(id)
+                    foreignKeyName: fk_event_methods_event
+              - column:
+                  name: method
+                  type: VARCHAR(50)
+                  constraints:
+                    nullable: false

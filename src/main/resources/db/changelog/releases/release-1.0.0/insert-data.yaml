@@ -1,0 +1,35 @@
+databaseChangeLog:
+  - changeSet:
+      id: "insert_notification_templates"
+      author: "ilitvak"
+      changes:
+        - insert:
+            tableName: templates
+            columns:
+              - column:
+                  name: event_type
+                  value: "FRIENDS_REQUEST"
+              - column:
+                  name: method
+                  value: "APP_BELL"
+              - column:
+                  name: locale
+                  value: "en"
+              - column:
+                  name: template_text
+                  value: "${senderFullName} wants to add you as a friend."
+        - insert:
+            tableName: templates
+            columns:
+              - column:
+                  name: event_type
+                  value: "FRIENDS_REQUEST"
+              - column:
+                  name: method
+                  value: "APP_BELL"
+              - column:
+                  name: locale
+                  value: "ru"
+              - column:
+                  name: template_text
+                  value: "${senderFullName} хочет добавить Вас в друзья."
