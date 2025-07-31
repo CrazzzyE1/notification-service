@@ -3,7 +3,6 @@ package ru.ilitvak.notification_service.model.entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import ru.ilitvak.notification_service.event.EventType;
 import ru.ilitvak.notification_service.event.NotificationMethod;
 
 import java.util.UUID;
