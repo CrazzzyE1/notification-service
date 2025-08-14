@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 import ru.ilitvak.notification_service.event.EventType;
 
+import java.time.Instant;
 import java.util.UUID;
 
 @Getter
@@ -15,4 +16,5 @@ public class NotificationDto {
     @JsonProperty("isRead")
     private Boolean isRead;
     private EventType type;
+    private Instant created;
 }
