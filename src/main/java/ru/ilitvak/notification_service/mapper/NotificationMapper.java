@@ -9,6 +9,7 @@ import ru.ilitvak.notification_service.model.entity.Notification;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
@@ -20,7 +21,14 @@ public interface NotificationMapper {
     @Mapping(target = "senderId", source = "senderId")
     @Mapping(target = "text", source = ".", qualifiedByName = "getText")
     @Mapping(target = "isRead", source = ".", qualifiedByName = "isRead")
+    @Mapping(target = "id", source = ".", qualifiedByName = "setNotificationId")
     NotificationDto toDto(EventEntity entity);
+
+    @Mapping(target = "type", ignore = true)
+    @Mapping(target = "senderId", ignore = true)
+    @Mapping(target = "created", ignore = true)
+    @Mapping(target = "isRead", source = "read")
+    NotificationDto toDto(Notification entity);
 
     List<NotificationDto> toListDto(List<EventEntity> entity);
 
@@ -41,5 +49,13 @@ public interface NotificationMapper {
                 .filter(n -> APP_BELL.equals(n.getType()))
                 .findFirst()
                 .map(notification -> TRUE.equals(notification.getRead())).orElse(FALSE);
+    }
+
+    @Named("setNotificationId")
+    default UUID setNotificationId(EventEntity entity) {
+        return entity.getNotifications().stream()
+                .filter(n -> APP_BELL.equals(n.getType()))
+                .findFirst()
+                .map(Notification::getId).orElse(null);
     }
 }

@@ -11,6 +11,7 @@ import java.util.UUID;
 @Getter
 @Setter
 public class NotificationDto {
+    private UUID id;
     private UUID senderId;
     private String text;
     @JsonProperty("isRead")
