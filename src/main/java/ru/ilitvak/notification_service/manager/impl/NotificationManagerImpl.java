@@ -41,4 +41,9 @@ public class NotificationManagerImpl implements NotificationManager {
         }
         return notification;
     }
+
+    @Override
+    public long getCount(UUID me, Boolean unread) {
+        return eventRepository.countUnreadByRecipientAndMethod(me, APP_BELL, unread);
+    }
 }

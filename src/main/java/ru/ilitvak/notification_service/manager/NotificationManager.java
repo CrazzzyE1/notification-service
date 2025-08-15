@@ -10,4 +10,6 @@ public interface NotificationManager {
     List<EventEntity> getAllAppBell(UUID me);
 
     Notification readUnread(UUID me, UUID id);
+
+    long getCount(UUID me, Boolean unread);
 }

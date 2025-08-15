@@ -8,7 +8,6 @@ import ru.ilitvak.notification_service.manager.NotificationManager;
 import ru.ilitvak.notification_service.mapper.EventMapper;
 import ru.ilitvak.notification_service.mapper.NotificationMapper;
 import ru.ilitvak.notification_service.model.dto.NotificationDto;
-import ru.ilitvak.notification_service.model.entity.Notification;
 import ru.ilitvak.notification_service.service.NotificationService;
 import ru.ilitvak.notification_service.util.JwtTokenMapper;
 
@@ -39,5 +38,11 @@ public class NotificationServiceImpl implements NotificationService {
     public NotificationDto readUnreadNotifications(String authHeader, UUID id) {
         UUID me = JwtTokenMapper.parseUserId(authHeader);
         return notificationMapper.toDto(notificationManager.readUnread(me, id));
+    }
+
+    @Override
+    public long getNotificationsCount(String authHeader, Boolean unread) {
+        UUID me = JwtTokenMapper.parseUserId(authHeader);
+        return notificationManager.getCount(me, unread);
     }
 }

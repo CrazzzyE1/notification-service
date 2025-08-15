@@ -15,4 +15,13 @@ public interface EventRepository extends JpaRepository<EventEntity, UUID> {
     @Query("SELECT e FROM EventEntity e WHERE e.recipientId = :recipientId AND :method MEMBER OF e.methods")
     List<EventEntity> findAllByRecipientIdAndMethod(@Param("recipientId") UUID recipientId,
                                                     @Param("method") NotificationMethod method);
+
+    @Query("SELECT COUNT(n) FROM Notification n " +
+            "JOIN n.event e " +
+            "WHERE e.recipientId = :recipientId " +
+            "AND :method MEMBER OF e.methods " +
+            "AND n.read != :unread")
+    long countUnreadByRecipientAndMethod(@Param("recipientId") UUID recipientId,
+                                         @Param("method") NotificationMethod method,
+                                         @Param("unread") boolean unread);
 }

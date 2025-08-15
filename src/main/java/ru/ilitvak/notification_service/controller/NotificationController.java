@@ -25,4 +25,12 @@ public class NotificationController {
                                                    @PathVariable UUID id) {
         return notificationService.readUnreadNotifications(authHeader, id);
     }
+
+    @GetMapping("/count")
+    public long getNotificationsCount(@RequestHeader(value = "Authorization") String authHeader,
+                                      @RequestParam(value = "isNew",
+                                              required = false,
+                                              defaultValue = "true") Boolean unread) {
+        return notificationService.getNotificationsCount(authHeader, unread);
+    }
 }

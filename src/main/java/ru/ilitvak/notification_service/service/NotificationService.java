@@ -12,4 +12,6 @@ public interface NotificationService {
     List<NotificationDto> getNotifications(String authHeader);
 
     NotificationDto readUnreadNotifications(String authHeader, UUID id);
+
+    long getNotificationsCount(String authHeader, Boolean unread);
 }
